@@ -25,8 +25,13 @@ namespace MyRazor.Controllers
         }
 
         // GET: PhotoController/Create
-        public ActionResult Create()
+        public ActionResult Create(Photo model)
         {
+            var status = service.AddOrEditPhoto(model);
+            if (status == StatusEnum Ok)
+            {
+
+            }
             return View();
         }
 

@@ -15,7 +15,17 @@ namespace MyRazor.Service
         }
         public Status AddOrEditPhoto(Photo model)
         {
-            throw new NotImplementedException();
+            using (SqlConnection db = new SqlConnection(config["conStr"]))
+            {
+                DynamicParameters p = new DynamicParameters(model);
+                p.Add("returnValue", null, DbType.Int32, ParameterDirection.ReturnValue);
+                db.Execute("pPhoto;2", p, commandType: CommandType.StoredProcedure);
+                var result = p.Get<int>("returnValue");
+                if (result == 1)
+                {
+                    Status status = StatusEnum.OK;
+                }
+            }
         }
 
         public IEnumerable<Photo> GetPhotoAllorById(string id)
