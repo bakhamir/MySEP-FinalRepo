@@ -7,7 +7,8 @@ namespace MyRazor.Abstract
         IEnumerable<T> GetPhotoAllorById(string id);
         Status AddOrEditPhoto(T model);
 		T GetPhotoById(string id);
-	}
+        bool DeletePhotoById(string id);
+    }
 }
 
 /*

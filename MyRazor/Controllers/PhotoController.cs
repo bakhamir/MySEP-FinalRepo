@@ -12,58 +12,52 @@ namespace MyRazor.Controllers
         {
             this.service = service;
         }
-        
+
         public ActionResult Index()
-        {            
+        {
             return View(service.GetPhotoAllorById("0"));
         }
 
         // GET: PhotoController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            return View(service.GetPhotoById(id));
         }
 
         // GET: PhotoController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Create(Photo model)
         {
             var status = service.AddOrEditPhoto(model);
-            if (status == StatusEnum Ok)
-            {
-
-            }
+            if (status.status == StatusEnum.OK)
+                return RedirectToAction("index");
+            ModelState.AddModelError("", "такое имя и расширение уже существует");
             return View();
-        }
-
-        // POST: PhotoController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: PhotoController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            return View(service.GetPhotoById(id));
         }
 
         // POST: PhotoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Photo model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var status = service.AddOrEditPhoto(model);
+                if (status.status == StatusEnum.OK)
+                    return RedirectToAction("index");
+                ModelState.AddModelError("Name", "Такое имя и расширение уже существуют");
+                return View();
             }
             catch
             {
@@ -72,8 +66,13 @@ namespace MyRazor.Controllers
         }
 
         // GET: PhotoController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
+            
+            bool status = service.DeletePhotoById(id);
+            if (status  == true)
+                return RedirectToAction("index");
+            ModelState.AddModelError("Name", "Такое имя и расширение уже существуют");
             return View();
         }
 

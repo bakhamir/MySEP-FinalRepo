@@ -20,11 +20,18 @@ namespace MyRazor.Service
                 DynamicParameters p = new DynamicParameters(model);
                 p.Add("returnValue", null, DbType.Int32, ParameterDirection.ReturnValue);
                 db.Execute("pPhoto;2", p, commandType: CommandType.StoredProcedure);
-                var result = p.Get<int>("returnValue");
+                var result = p.Get<int>("@returnValue");
                 if (result == 1)
+                    return new Status
+                    {
+                        status = StatusEnum.OK,
+                        result = "ok"
+                    };
+                return new Status
                 {
-                    Status status = StatusEnum.OK;
-                }
+                    status = StatusEnum.ERROR,
+                    result = "error"
+                };
             }
         }
 
@@ -32,13 +39,30 @@ namespace MyRazor.Service
         {
             using (SqlConnection db = new SqlConnection(config["conStr"]))
             {
-                return db.Query<Photo>("pPhoto", new { id = id }, commandType:CommandType.StoredProcedure);
+                return db.Query<Photo>("pPhoto", new { id = id }, commandType: CommandType.StoredProcedure);
             }
         }
 
         public Photo GetPhotoById(string id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection db = new SqlConnection(config["conStr"]))
+            {
+                return db.Query<Photo>("pPhoto", new { id = id }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
         }
+
+        public bool DeletePhotoById(string id)
+        {
+            using (SqlConnection db = new SqlConnection(config["conStr"]))
+            {
+                var res = db.Execute("delPhoto" , new { id = id }, commandType: CommandType.StoredProcedure);
+                if (res != 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
     }
 }
