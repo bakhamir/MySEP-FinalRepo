@@ -29,7 +29,7 @@ namespace MyRazor
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Photo}/{action=Index}/{id?}");
+                pattern: "{controller=Invoice}/{action=Create}/{id?}");
 
             app.Run();
         }

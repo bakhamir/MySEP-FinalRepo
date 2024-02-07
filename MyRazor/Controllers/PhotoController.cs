@@ -33,10 +33,15 @@ namespace MyRazor.Controllers
         [HttpPost]
         public ActionResult Create(Photo model)
         {
-            var status = service.AddOrEditPhoto(model);
-            if (status.status == StatusEnum.OK)
-                return RedirectToAction("index");
-            ModelState.AddModelError("", "такое имя и расширение уже существует");
+
+            //var status = service.AddOrEditPhoto(model);
+            //if (status.status == StatusEnum.OK)
+            //    return RedirectToAction("index");
+            //ModelState.AddModelError("", "такое имя и расширение уже существует");
+            if (model.Name != "step")
+                ModelState.AddModelError("", "Вы ввели не step");
+            if (model.Extension != "step")
+                ModelState.AddModelError("", "Вы ввели не step");
             return View();
         }
 
@@ -71,7 +76,7 @@ namespace MyRazor.Controllers
             
             bool status = service.DeletePhotoById(id);
             if (status  == true)
-                return RedirectToAction("index");
+            return RedirectToAction("index");
             ModelState.AddModelError("Name", "Такое имя и расширение уже существуют");
             return View();
         }
@@ -89,6 +94,14 @@ namespace MyRazor.Controllers
             {
                 return View();
             }
+        }
+        [HttpGet]
+        public ActionResult MyCheck(string name) 
+        {
+            if (name == "step")
+                return Json(false);
+            return Json(true);
+                  
         }
     }
 }

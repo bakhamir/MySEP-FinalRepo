@@ -47,7 +47,9 @@ namespace MyRazor.Service
         {
             using (SqlConnection db = new SqlConnection(config["conStr"]))
             {
+            
                 return db.Query<Photo>("pPhoto", new { id = id }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            
             }
         }
 
