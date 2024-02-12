@@ -11,7 +11,7 @@ namespace MyRazor.Models
         [Range(1000,100000,ErrorMessage ="Sum is either too small or too big")]
         public string Sum { get; set; }
         [Required(ErrorMessage = "Date is required")]
-        //another one...
+        //
         [Remote("DateCheck","Date",ErrorMessage ="Date is too far from today")]
         public DateTime  Date { get; set; }
         [MaxLength(20,ErrorMessage ="email no longer than 20 symbols")]

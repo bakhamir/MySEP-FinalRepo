@@ -31,8 +31,10 @@ namespace MyRazor.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
+
             return View();
-        }
+
+        } 
 
         // GET: InvoiceController/Edit/5
         public ActionResult Edit(int id)
