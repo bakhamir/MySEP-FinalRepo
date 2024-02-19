@@ -9,7 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Security.Claims;
 
-namespace MyAuthForm.Controllers
+namespace MyMusic.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -33,7 +33,7 @@ namespace MyAuthForm.Controllers
         {
             using (SqlConnection db = new SqlConnection(config["conStr"]))
             {
-                var result = db.Query<dynamic>("pUsers;2", new { login = user.Login, pwd = user.Password }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                var result = db.Query<dynamic>("pUsers", new { login = user.Login, pwd = user.Password }, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 if (result == null)
                 {
                     ModelState.AddModelError("", "Login failed. Please check Username and/or password");
@@ -50,8 +50,8 @@ namespace MyAuthForm.Controllers
                 var identity = new ClaimsIdentity(claims,
                     CookieAuthenticationDefaults.AuthenticationScheme);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(identity));
-                return Redirect("~/Home/Index");
+                    new ClaimsPrincipal(identity)); 
+                return Redirect("~/Mus/Index");
 
             }
             if (true)
@@ -92,7 +92,7 @@ namespace MyAuthForm.Controllers
             using (SqlConnection db = new SqlConnection(config["conStr"]))
             {
                 DynamicParameters p = new DynamicParameters(user);
-                var result = db.Query<User>("pUsers", p, commandType: CommandType.StoredProcedure);
+                var result = db.Query<User>("pUsers;2", p, commandType: CommandType.StoredProcedure);
             }
             return View();
         }
