@@ -8,7 +8,8 @@ namespace MyRazor.Abstract
         Status AddOrEditPhoto(T model);
 		T GetPhotoById(string id);
         bool DeletePhotoById(string id);
-    }
+		//new beginnigs~
+		}
 }
 
 /*
