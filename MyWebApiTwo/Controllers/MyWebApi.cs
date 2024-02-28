@@ -61,7 +61,7 @@ namespace MyWebApiTwo.Controllers
         [HttpPost,Route("GetStudentViaPost/{id}")]
         public ActionResult GetStudentViaPost(GetStudentViaPostRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Id.ToString()))
+            if (string.IsNullOrWhiteSpace(request.Id.ToString())) 
                 return Ok(list);
             return Ok(list.Where(z => z.Id == request.Id).FirstOrDefault());
         }
