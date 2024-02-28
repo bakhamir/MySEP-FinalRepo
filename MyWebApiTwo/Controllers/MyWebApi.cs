@@ -18,7 +18,6 @@ namespace MyWebApiTwo.Controllers
                     new Student { Id = 1, FirstName = "Artem", LastName = "Kan", DateBirth = DateTime.Now },
                     new Student { Id = 2, FirstName = "Vasya", LastName = "Pupkin", DateBirth = DateTime.Now },
                     new Student { Id = 3, FirstName = "Anton", LastName = "Smeshnyakov", DateBirth = DateTime.Now },
-
                 };
             }
 

@@ -23,4 +23,10 @@
     {
         public int Id { get; set; }
     }
+
+
+    public class QueryById
+    {
+        public string id { get; set; }
+    }
 }         
