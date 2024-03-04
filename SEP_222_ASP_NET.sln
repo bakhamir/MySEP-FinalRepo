@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyIdentity", "MyIdentity\My
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyIdentitylogin", "MyIdentitylogin\MyIdentitylogin.csproj", "{B778A361-4B99-4306-BE11-BAFB139B46D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApi", "MyApi\MyApi.csproj", "{2A6D559C-B0EE-48BD-B127-BBA19E499796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApi", "MyApi\MyApi.csproj", "{2A6D559C-B0EE-48BD-B127-BBA19E499796}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApiTwo", "MyWebApiTwo\MyWebApiTwo.csproj", "{CBD3D208-751A-498B-B87B-2FE5194177CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWebApiTwo", "MyWebApiTwo\MyWebApiTwo.csproj", "{CBD3D208-751A-498B-B87B-2FE5194177CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBaseAuth", "MyBaseAuth\MyBaseAuth.csproj", "{C2382CD2-14C6-4868-9B72-1EDE63D4E055}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{CBD3D208-751A-498B-B87B-2FE5194177CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD3D208-751A-498B-B87B-2FE5194177CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBD3D208-751A-498B-B87B-2FE5194177CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2382CD2-14C6-4868-9B72-1EDE63D4E055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2382CD2-14C6-4868-9B72-1EDE63D4E055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2382CD2-14C6-4868-9B72-1EDE63D4E055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2382CD2-14C6-4868-9B72-1EDE63D4E055}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
