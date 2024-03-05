@@ -29,10 +29,9 @@ namespace Validate.Controllers
 
                 if (existingCount > 0)
                 {
-                    return false; // Логин уже занят
+                    return false;  
                 }
-
-                // Добавление нового пользователя
+                 
                 connection.Execute(
                     "INSERT INTO Users (Login, Password, Email, DateTime) VALUES (@Login, @Password, @Email, @DateTime)",
                     new
@@ -44,7 +43,7 @@ namespace Validate.Controllers
                     });
             }
 
-            return true; // Пользователь успешно добавлен
+            return true;  
         }
   
     }
