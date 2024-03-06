@@ -36,6 +36,7 @@ namespace MyBaseAuth.Auth
                     {
                     new Claim(ClaimTypes.Name, login),
                     new Claim("psw", psw) 
+
                     };
 
                     var identity = new ClaimsIdentity(claims, Scheme.Name);
