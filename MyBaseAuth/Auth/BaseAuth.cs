@@ -25,7 +25,7 @@ namespace MyBaseAuth.Auth
                 var login = credArray[0];
                 var psw = credArray[1];
 
-                // Данные из базы данных
+                // Данные из базы данны х
                 string dbCred = "user1:1234";
                 var dbCheckArray = dbCred.Split(':');
 
@@ -38,7 +38,6 @@ namespace MyBaseAuth.Auth
                     new Claim("psw", psw) 
 
                     };
-
                     var identity = new ClaimsIdentity(claims, Scheme.Name);
                     var principal = new ClaimsPrincipal(identity);
                     var ticket = new AuthenticationTicket(principal, Scheme.Name);
