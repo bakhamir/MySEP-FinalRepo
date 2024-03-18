@@ -30,7 +30,7 @@ namespace MyJvt.Controllers
                 /*
                  проверка в БД 
                  */
-
+    
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
