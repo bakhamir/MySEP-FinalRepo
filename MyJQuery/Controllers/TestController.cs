@@ -8,6 +8,16 @@ namespace MyJQuery.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
+        List<City> lst;
+        public TestController()
+        {
+            lst = new List<City>()
+            {
+                new City{Id=1, Name="Астана"},
+                new City{Id=2, Name="NY"},
+                new City{Id=3, Name="Москва"}
+            };
+        }
         [HttpGet("SayHello/{name}")]
         public ActionResult SayHello(string name)
         {
