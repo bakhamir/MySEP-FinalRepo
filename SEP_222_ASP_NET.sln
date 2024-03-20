@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyJsApi", "MyJsApi\MyJsApi.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyJQuery", "MyJQuery\MyJQuery.csproj", "{F548EC2F-1A38-48AC-9C73-4A7D19E37209}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMusicCRUD", "MyMusicCRUD\MyMusicCRUD.csproj", "{6AA8B035-A4EC-462A-8934-36B4AD449445}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{F548EC2F-1A38-48AC-9C73-4A7D19E37209}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F548EC2F-1A38-48AC-9C73-4A7D19E37209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F548EC2F-1A38-48AC-9C73-4A7D19E37209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AA8B035-A4EC-462A-8934-36B4AD449445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA8B035-A4EC-462A-8934-36B4AD449445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA8B035-A4EC-462A-8934-36B4AD449445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA8B035-A4EC-462A-8934-36B4AD449445}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

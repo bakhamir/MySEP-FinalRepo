@@ -1,20 +1,5 @@
 $(document).ready(function () {
     $("#myButton").click(function () {
-        // var value = $("#tbTest").val();
-        // //console.log(value);
-        // $("#divTest").html('<b>' + value + '</b>');
-        // alert(value);
-        // $.ajax
-        //     ({
-        //         type: "GET",
-        //         url: "http://localhost:5099/test/sayhello/step",
-        //         success: function (data) {
-        //             console.log(data);
-        //         },
-        //         error: function () {
-        //             console.log("error")
-        //         }
-        //     });
 
 
         $.ajax
