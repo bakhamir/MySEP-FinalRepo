@@ -7,4 +7,8 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <h2>@ViewData["role"]</h2>
     <h2>@ViewBag.c1</h2>
+    @using (Html.BeginForm("ExportToExcel", "Home", FormMethod.Post))
+    {
+        <button type="submit" class="btn btn-primary">Экспорт в Excel</button>
+    }
 </div>
