@@ -34,8 +34,7 @@ namespace MyWebApiTwo.Controllers
 
             [HttpGet("retrieve")]
             public IActionResult RetrieveCookieData()
-            {
-                // Получаем данные из куки
+            { 
                 if (Request.Cookies.TryGetValue("MyCookie", out string cookieValue))
                 {
                     var cookieData = Newtonsoft.Json.JsonConvert.DeserializeObject(cookieValue);
