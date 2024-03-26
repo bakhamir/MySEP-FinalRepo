@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyJQuery.Model;
+using Dapper;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace MyJQuery.Controllers
 {
@@ -27,12 +30,10 @@ namespace MyJQuery.Controllers
         [HttpGet("getCityAll")]
         public ActionResult getCityAll()
         {
-            List<City> lst = new List<City>()
+            using (SqlConnection db = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=testdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
-                new City{Id=1, Name="Астана"},
-                new City{Id=2, Name="NY"},
-                new City{Id=3, Name="Москва"}
-            };
+                List<City> lst = db.Query<City>("pGetAllCities",commandType: System.Data.CommandType.StoredProcedure).ToList();
+            }
             return Ok(lst);
         }
         [HttpPost("createCity")]
