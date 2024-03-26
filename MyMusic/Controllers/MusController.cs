@@ -87,7 +87,7 @@ namespace MyMusic.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public ActionResult Delette(int id)
         {
             bool res = service.DeleteSong(id);
             if (res)

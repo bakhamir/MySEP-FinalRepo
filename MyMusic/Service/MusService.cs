@@ -65,7 +65,9 @@ namespace MyMusic.Service
                 return res > 0;
             }
         }
-        public song GetSongById(int id)
+
+
+        object IMusic<song>.GetSongById(int id)
         {
             using (SqlConnection db = new SqlConnection(config["conStr"]))
             {
@@ -74,7 +76,6 @@ namespace MyMusic.Service
                 return db.QueryFirstOrDefault<song>("pGetMusicById", p, commandType: CommandType.StoredProcedure);
             }
         }
-
     }
 }
 //CREATE PROCEDURE pEditMusic
