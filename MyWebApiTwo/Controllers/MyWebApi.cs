@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Dapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyWebApiTwo.Model;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace MyWebApiTwo.Controllers
 {
@@ -64,5 +68,26 @@ namespace MyWebApiTwo.Controllers
                 return Ok(list);
             return Ok(list.Where(z => z.Id == request.Id).FirstOrDefault());
         }
+        [HttpGet, Route("GetAllStudents")]
+        public IEnumerable<Student> GetAllStudents()
+        {
+            using (SqlConnection db = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=testdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+                return db.Query<Student>("pGetAllStudents", commandType: CommandType.StoredProcedure);
+            }
+        }
+        [HttpPost, Route("DeleteStudent/{id}")]
+        public void DeleteStudent(int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", id);
+            using (SqlConnection db = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=testdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+                return db.Execute("DeleteStudentProcedure", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+
+
     }
 }

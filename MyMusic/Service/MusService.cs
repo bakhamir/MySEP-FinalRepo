@@ -78,38 +78,3 @@ namespace MyMusic.Service
         }
     }
 }
-//CREATE PROCEDURE pEditMusic
-//    @id INT,
-//    @artist NVARCHAR(100),
-//    @title NVARCHAR(100),
-//    @categoryid INT,
-//    @duration NVARCHAR(50),
-//    @typeid INT
-//AS
-//BEGIN
-//    UPDATE songs
-//    SET
-//        artist = @artist,
-//        title = @title,
-//        categoryid = @categoryid,
-//        duration = @duration,
-//        typeid = @typeid
-//    WHERE
-//        id = @id;
-//END
-
-//CREATE PROCEDURE pDeleteMusic
-//    @id INT
-//AS
-//BEGIN
-//    DELETE FROM songs
-//    WHERE id = @id;
-//END
-//CREATE PROCEDURE pGetMusicById
-//    @id INT
-//AS
-//BEGIN
-//    SELECT *
-//    FROM songs
-//    WHERE id = @id;
-//END
