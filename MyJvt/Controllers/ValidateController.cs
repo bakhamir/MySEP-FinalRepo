@@ -14,65 +14,59 @@ namespace MyJvt.Controllers
     [ApiController, Authorize]
     public class ValidateController : ControllerBase
     {
-        IConfiguration config;
-        public ValidateController(IConfiguration config)
+        [ApiController]
+        [Route("api/[controller]")]
+        public class AuthController : ControllerBase
         {
-            this.config = config;
-        }
-        [AllowAnonymous]
-        [HttpPost, Route("GetToken")]
-        public ActionResult GetToken(UserModel model)
-        {
-            try
+            private readonly IConfiguration _configuration;
+
+            public AuthController(IConfiguration configuration)
             {
+                _configuration = configuration;
+            }
 
-
-                /*
-                 проверка в БД 
-                 */
-    
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
-                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-                var claims = new[] {
-                      new Claim("myRole", "admin"),
-                      new Claim("dateBirth", "2000-01-01")
+            [HttpPost("login")]
+            public IActionResult Login(UserModel model)
+            { 
+                if (model.login == "exampleUser" && model.password == "examplePassword")
+                { 
+                    var claims = new[]
+                    {
+                    new Claim(ClaimTypes.Name,model.login),
+                    new Claim(ClaimTypes.Role, "user")  
                 };
 
-                var token = new JwtSecurityToken(config["Jwt:Issuer"],
-                    config["Jwt:Issuer"],
-                    claims,
-                    //null,
-                    expires: DateTime.Now.AddMinutes(5),
-                    signingCredentials: credentials);
+                    var token = new JwtSecurityToken(
+                        issuer: _configuration["Jwt:Issuer"],
+                        audience: _configuration["Jwt:Audience"],
+                        claims: claims,
+                        expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpirationMinutes"])),
+                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"])), SecurityAlgorithms.HmacSha256));
 
-                var sToken = new JwtSecurityTokenHandler().WriteToken(token);
-
-                return Ok(new ReturnStatus
-                {
-                    status = StatusEnum.OK,
-                    result = sToken
-                });
+                    return Ok(new
+                    {
+                        token = new JwtSecurityTokenHandler().WriteToken(token)
+                    });
+                }
+                else
+                { 
+                    return Unauthorized();
+                }
             }
-            catch (Exception err)
+            [HttpGet("test")]
+            [Authorize]
+            public IActionResult Test()
             {
-                return Ok(new ReturnStatus
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                if (identity != null)
                 {
-                    status = StatusEnum.ERROR,
-                    result = "error",
-                    error = err.Message
-                });
+                    IEnumerable<Claim> claims = identity.Claims; 
+                    return Ok(claims);
+                }
+
+                return BadRequest("Failed to retrieve user claims");
             }
         }
-
-        [HttpGet, Authorize, Route("GetTest/{name}")]
-        public ActionResult GetTest(string name)
-        {
-            return Ok("Hello " + name + " " + User.FindFirst("myRole")?.Value);
-        }
-
-
-
 
     }
 }
