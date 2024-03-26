@@ -53,46 +53,52 @@ namespace MyMusic.Controllers
 
         }
 
-        // GET: MusController/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var song = service.GetSongById(id); 
+            return View(song);
         }
 
-        // POST: MusController/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(song song)
         {
-            try
+            bool res = service.EditSong(song);
+            if (res)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                return View();
+                return View(song);
             }
         }
 
-        // GET: MusController/Delete/5
+        
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            var song = service.GetSongById(id); 
+            return View(song);
         }
 
-        // POST: MusController/Delete/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
+            bool res = service.DeleteSong(id);
+            if (res)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
                 return View();
             }
         }
+
     }
 }
