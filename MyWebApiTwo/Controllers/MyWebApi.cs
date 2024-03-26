@@ -77,7 +77,7 @@ namespace MyWebApiTwo.Controllers
             }
         }
         [HttpPost, Route("DeleteStudent/{id}")]
-        public void DeleteStudent(int id)
+        public int DeleteStudent(int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Id", id);
@@ -86,7 +86,7 @@ namespace MyWebApiTwo.Controllers
                 return db.Execute("DeleteStudentProcedure", parameters, commandType: CommandType.StoredProcedure);
             }
         }
-
+ 
 
 
     }
