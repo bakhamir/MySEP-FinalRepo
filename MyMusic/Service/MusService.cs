@@ -36,7 +36,7 @@ namespace MyMusic.Service
         {
             using (SqlConnection db = new SqlConnection(config["conStr"]))
             {
-                return db.Query<song>("pMusic", commandType: CommandType.StoredProcedure);
+                return db.Query<song>("GetAllSongs", commandType: CommandType.StoredProcedure);
             }
         }
         public bool EditSong(song song)
