@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<!--<!DOCTYPE html>
 <html>
 
 <head>
@@ -24,7 +24,7 @@
             <li class="breadcrumb-item active" aria-current="page">Something about music</li>
         </ol>
     </nav>
- 
+
     <div class="container">
         <div class="row">
 
@@ -64,6 +64,60 @@
         </div>
     </div>
 
+</body>
+
+</html>-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Music CRUD</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/jquery-confirm.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/jquery-confirm.js"></script>
+    <script src="Scripts/MyJS.js"></script>
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Something about music</li>
+        </ol>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn-green" id="Add">Add new song</button>
+                <form class="newSongForm" id="FormAdd">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Song title</label>
+                        <input type="text" class="form-control" id="inputTitle" aria-describedby="TitleHelp" placeholder="Enter title">
+                        <small id="emailHelp" class="form-text text-muted">its really important</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputDuration">Duration in seconds</label>
+                        <input type="text" class="form-control" id="exampleInputDuration" placeholder="Time">
+                    </div>
+                    <select class="form-select" id="categorySelect" aria-label="Default select example">
+                        <!-- Options will be added dynamically -->
+                    </select>
+                </form>
+                <button type="button" class="btn btn-primary" id="EdButton">Edit</button>
+                <input type="number" class="form-control" id="EditId" placeholder="Id to EDIT">
+                <button type="button" class="btn btn-warning" id="DelButton">Delete</button>
+                <input type="number" class="form-control" id="DelId" placeholder="Id to DELETE">
+            </div>
+            <div class="col-md-4">
+                <button class=" btn btn-danger" id="theButton">get all songs</button>
+                <div id="main"></div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
