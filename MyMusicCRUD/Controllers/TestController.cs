@@ -7,7 +7,7 @@ using MyMusicCRUD.Models;
 
 namespace MyMusicCRUD.Controllers
 {
-    [Route("[controller]")]
+    [Route("test")]
     [ApiController]
     public class TestController : ControllerBase
     {
@@ -16,6 +16,16 @@ namespace MyMusicCRUD.Controllers
         public TestController(IConfiguration config)
         {
             _config = config;
+        }
+
+        [HttpGet("GetAllCategories")]
+        public IActionResult GetAllCategories()
+        {
+            using (SqlConnection db = new SqlConnection(_config["conStr"]))
+            {
+                var res = db.Query<Category>("GetAllCategories", commandType: System.Data.CommandType.StoredProcedure).AsList();
+                return Ok(res);
+            }
         }
 
         [HttpGet("GetSongs")]

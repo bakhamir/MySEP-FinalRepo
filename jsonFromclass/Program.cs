@@ -3,7 +3,9 @@ using System.Linq;
 using Dapper;
 using System.Data.SqlClient;
 using jsonFromclass.Models;
-
+using RestSharp;
+using System;
+using System.Threading.Tasks;
 
 namespace jsonFromclass
 {
@@ -12,7 +14,11 @@ namespace jsonFromclass
         static string constr = @"Server=206-4\SQLEXPRESS;Database=testdb;Trusted_Connection=True;";
         static void Main(string[] args)
         {
-            test1("1");
+
+            var client = new RestClient();    
+            var request = new RestRequest("http://localhost:5051/test/GetAllCategories", Method.Get);
+            RestResponse response =  client.Execute(request);
+            Console.WriteLine(response.Content);
         }
         static void test1(string id)
         {

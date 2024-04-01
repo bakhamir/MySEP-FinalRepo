@@ -18,6 +18,11 @@
             this.id = id_;
             this.genre = genre_;
         }
+        public Category( )
+        {
+            this.id = 0;
+            this.genre = "no genre";
+        }
     }
 
 }

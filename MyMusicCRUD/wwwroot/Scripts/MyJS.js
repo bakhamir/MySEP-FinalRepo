@@ -60,7 +60,7 @@ $(document).ready(function () {
     function getAllCategories() {
         $.ajax({
             type: "GET",
-            url: "category/GetAllCategories",
+            url: "test/GetAllCategories",
             success: function (data) {
                 let options = '<option selected disabled>Select category</option>';
                 data.forEach(function (category) {
