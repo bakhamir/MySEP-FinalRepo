@@ -6,6 +6,8 @@ using jsonFromclass.Models;
 using RestSharp;
 using System;
 using System.Threading.Tasks;
+using static MySoapy.WebService1;
+using jsonFromclass.ServiceReference1;
 
 namespace jsonFromclass
 {
@@ -14,11 +16,12 @@ namespace jsonFromclass
         static string constr = @"Server=206-4\SQLEXPRESS;Database=testdb;Trusted_Connection=True;";
         static void Main(string[] args)
         {
-
-            var client = new RestClient();    
-            var request = new RestRequest("http://localhost:5051/test/GetAllCategories", Method.Get);
-            RestResponse response =  client.Execute(request);
-            Console.WriteLine(response.Content);
+            WebService1Soap.
+            //WebService1Soap.EndpointConfiguration = new WebService1Soap();
+            //var client = new RestClient();    
+            //var request = new RestRequest("http://localhost:5051/test/GetAllCategories", Method.Get);
+            //RestResponse response =  client.Execute(request);
+            //Console.WriteLine(response.Content);
         }
         static void test1(string id)
         {

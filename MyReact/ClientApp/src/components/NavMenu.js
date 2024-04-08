@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
-import test from './components/test.jsx';
+
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
@@ -39,8 +39,11 @@ export class NavMenu extends Component {
                 <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/test">Fetch data</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/Test">Test</NavLink>
               </NavItem>
+          <NavItem>
+              <NavLink tag={Link} className="text-dark" to="/Yoba">Yoba</NavLink>
+           </NavItem>
             </ul>
           </Collapse>
         </Navbar>
