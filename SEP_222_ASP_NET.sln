@@ -57,6 +57,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySOAP2", "MySOAP2\MySOAP2.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DapperToObjects", "DapperToObjects\DapperToObjects.csproj", "{E129DE98-4CD7-4094-8DB0-56004BE22472}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WritingCom", "WritingCom\WritingCom.csproj", "{A22F3189-F4D3-4DE4-B2DE-52D18FC205F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcEx", "MvcEx\MvcEx.csproj", "{C3049E77-7F38-4B3C-9187-E4264654D76F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +167,14 @@ Global
 		{E129DE98-4CD7-4094-8DB0-56004BE22472}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E129DE98-4CD7-4094-8DB0-56004BE22472}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E129DE98-4CD7-4094-8DB0-56004BE22472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A22F3189-F4D3-4DE4-B2DE-52D18FC205F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A22F3189-F4D3-4DE4-B2DE-52D18FC205F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A22F3189-F4D3-4DE4-B2DE-52D18FC205F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A22F3189-F4D3-4DE4-B2DE-52D18FC205F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3049E77-7F38-4B3C-9187-E4264654D76F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3049E77-7F38-4B3C-9187-E4264654D76F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3049E77-7F38-4B3C-9187-E4264654D76F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3049E77-7F38-4B3C-9187-E4264654D76F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

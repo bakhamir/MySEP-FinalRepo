@@ -1,8 +1,7 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
-import { Yoba } from "./components/Yoba";
-import Test from "./components/test";
+import { Test } from "./components/Test";
 
 const AppRoutes = [
   {
@@ -20,11 +19,7 @@ const AppRoutes = [
   {
     path: '/Test',
     element: <Test />
-  },
-    {
-        path: '/Yoba',
-        element: <Yoba />
-    }
+  }
 ];
 
 export default AppRoutes;
