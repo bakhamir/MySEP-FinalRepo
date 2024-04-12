@@ -22,14 +22,17 @@
         public string genre { get; set; }
         public DateTime written { get; set; }
         public int rating { get; set; }
+        public string contents { get; set; }
 
-        public Books(int id_, string title_, string genre_, DateTime written_, int rating_)
+        public Books(int id_, string title_, string genre_, DateTime written_, int rating_,string contents_)
         {
             this.id = id_;
             this.title = title_;
             this.genre = genre_;
             this.written = written_;
             this.rating = rating_;
+            this.contents = contents_;
         }
+        public Books() { }
     }
 }
