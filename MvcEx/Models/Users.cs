@@ -5,15 +5,14 @@
         public int id { get; set; }
         public string username { get; set; }
         public string pwd { get; set; }
-        public string email { get; set; }
 
-        public Users(int id_, string username_, string pwd_, string email_)
+        public Users(int id_, string username_, string pwd_)
         {
             this.id = id_;
             this.username = username_;
             this.pwd = pwd_;
-            this.email = email_;
         }
+        public Users() { }
     }
     public class Books
     {

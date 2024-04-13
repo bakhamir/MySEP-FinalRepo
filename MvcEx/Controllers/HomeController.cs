@@ -3,8 +3,11 @@ using MvcEx.Models;
 using System.Diagnostics;
 using System.Data.SqlClient;
 using Dapper;
+using Microsoft.AspNetCore.Authorization;
+
 namespace MvcEx.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
