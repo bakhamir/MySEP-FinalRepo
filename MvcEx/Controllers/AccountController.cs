@@ -46,15 +46,15 @@ namespace MvcEx.Controllers
                     var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.username),
-                new Claim(ClaimTypes.Role, "YourRole"), // Замените "YourRole" на реальную роль пользователя
+                new Claim(ClaimTypes.Role, "User"), 
                 new Claim("id", result.id.ToString())
-                // Добавьте другие утверждения, если необходимо
+                 
             };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var authProperties = new AuthenticationProperties
                     {
-                        // Здесь вы можете настроить свойства аутентификации, если необходимо
+                         
                     };
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
@@ -64,26 +64,79 @@ namespace MvcEx.Controllers
             }
         }
 
-
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        
         public async Task<ActionResult> Register(Users user)
         {
             using (SqlConnection db = new SqlConnection(_config["conStr"]))
             {
-                DynamicParameters p = new DynamicParameters(user);
-                var result = await db.QueryAsync<Users>("pUsers", p, commandType: CommandType.StoredProcedure);
+                var p = new DynamicParameters();
+                p.Add("@username", user.username);
+                p.Add("@pwd", user.pwd);
+                var result = await db.ExecuteAsync("pUsers", p, commandType: CommandType.StoredProcedure);
             }
-            return View();
+            return RedirectToAction("Login");  
         }
 
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult RedirectToRegister()
+        {
+            return RedirectToAction("Register", "Account");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateUsername(string newUsername)
+        {
+           
+   
+            var userId = User.FindFirstValue("id");
+            using (SqlConnection db = new SqlConnection(_config["conStr"]))
+            {
+
+                db.Query($"UPDATE Users SET username = '{newUsername}' WHERE id = {userId}");
+
+                TempData["SuccessMessage"] = "name changed.";
+
+            }
+
+            return RedirectToAction("Login", "Account");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteUser()
+        {
+ 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+ 
+            using (SqlConnection db = new SqlConnection(_config["conStr"]))
+            {
+                var Id = User.FindFirstValue("id");
+                db.Query($"DELETE FROM Users WHERE id = {Id}");
+
+            }
+
+      
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+ 
             return RedirectToAction("Index", "Home");
         }
     }

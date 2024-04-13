@@ -7,6 +7,32 @@
 </head>
 <body>
     <h1>Добро пожаловать на писательскую платформу</h1>
+    <p>Привет, @User.Identity.Name! Ты в системе.</p>
+     <form asp-controller="Account" asp-action="UpdateUsername" method="post">
+        <input type="text" name="newUsername" placeholder="Enter new username">
+        <button type="submit">Change Username</button>
+
+      
+
+        @{
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <script>
+        alert("@successMessage");
+    </script>
+}
+        @Html.AntiForgeryToken()
+    </form>
+    <form asp-controller="Account" asp-action="DeleteUser" method="post">
+        <button type="submit" class="btn btn-danger">Delete User</button>
+    </form>
+      <form method="get" action="@Url.Action("AddBook", "Home")">
+            @Html.AntiForgeryToken()
+            <button type="submit">Добавить книгу</button>
+        </form>
     @using (Html.BeginForm("Search", "Home", FormMethod.Get))
     {
         <input type="text" name="searchTerm" placeholder="Введите название книги">
@@ -29,5 +55,10 @@
             </li>
         }
     </ul>
+  <form method="post" action="@Url.Action("Logout", "Account")">
+        @Html.AntiForgeryToken()
+        <button type="submit">Выход</button>
+    </form>
+
 </body>
 </html>

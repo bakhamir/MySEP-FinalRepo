@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Data.SqlClient;
 using Dapper;
 using Microsoft.AspNetCore.Authorization;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace MvcEx.Controllers
 {
@@ -20,7 +21,7 @@ namespace MvcEx.Controllers
 
         public ActionResult Index()
         {
-            // Получение списка книг из базы данных
+   
             List<Books> books;
             using (var connection = new SqlConnection(connectionString))
             {
@@ -28,7 +29,7 @@ namespace MvcEx.Controllers
                 books = connection.Query<Books>("SELECT * FROM Books").AsList();
             }
 
-            // Передача списка книг в представление
+            
             return View(books);
         }
         public IActionResult Privacy()
@@ -43,21 +44,20 @@ namespace MvcEx.Controllers
         }
         public ActionResult RateBook(int id, int rating)
         {
-            // Здесь нужно реализовать логику для изменения рейтинга книги с определенным id в базе данных
-            // Пример: вызов хранимой процедуры для обновления рейтинга книги
+           
+
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 connection.Execute("EXEC RateBook @id, @rating", new { id, rating });
             }
 
-            // Перенаправление на главную страницу после обновления рейтинга
             return RedirectToAction("Index");
         }
 
         public ActionResult BookDetails(int id)
         {
-            // Получение информации о книге с определенным id из базы данных
+
             Books book;
             List<string> comments;
             using (var connection = new SqlConnection(connectionString))
@@ -68,26 +68,26 @@ namespace MvcEx.Controllers
             }
             book.comments = comments;
 
-            // Передача информации о книге и комментариев в представление для отображения
+          
             return View(book);
         }
 
         [HttpPost]
         public ActionResult AddComment(int bookId, string comment)
         {
-            // Сохранение комментария к книге в базе данных
+            
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 connection.Execute("INSERT INTO Comments (bookId, comment) VALUES (@bookId, @comment)", new { bookId, comment });
             }
 
-            // Перенаправление на страницу с деталями книги после добавления комментария
+            
             return RedirectToAction("BookDetails", new { id = bookId });
         }
         public ActionResult Search(string searchTerm)
         {
-            // Получение списка книг, удовлетворяющих запросу поиска
+           
             List<Books> books;
             using (var connection = new SqlConnection(connectionString))
             {
@@ -95,12 +95,12 @@ namespace MvcEx.Controllers
                 books = connection.Query<Books>("SELECT * FROM Books WHERE title LIKE @searchTerm", new { searchTerm = "%" + searchTerm + "%" }).AsList();
             }
 
-            // Передача списка книг в представление для отображения
+            
             return View("Index", books);
         }
         public ActionResult SortByRating()
 {
-    // Получение списка книг, отсортированных по рейтингу
+    
     List<Books> books;
     using (var connection = new SqlConnection(connectionString))
     {
@@ -108,9 +108,29 @@ namespace MvcEx.Controllers
         books = connection.Query<Books>("SELECT * FROM Books ORDER BY rating DESC").AsList();
     }
 
-    // Передача списка книг в представление для отображения
+    
     return View("Index", books);
 }
+
+        [HttpGet]
+        public async Task<ActionResult> AddBook()
+        {
+            return View(); 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddBook(Books book)
+        {
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    var result = db.Query<Books>($"INSERT INTO Books (title, genre, written, rating, author, contents)" +
+                        $"VALUES ('{book.title}', '{book.genre}', '{book.written}', '{book.rating}', '{book.author}', '{book.contents}');\r\n");
+                }
+            return RedirectToAction("Index", "Home");
+        }
+
 
     }
 }

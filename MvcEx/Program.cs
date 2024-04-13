@@ -11,7 +11,7 @@ namespace MvcEx
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddSingleton<UserRepository>(new UserRepository("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Book;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 
-            // Add services to the container.
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -30,7 +30,6 @@ namespace MvcEx
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -42,10 +41,21 @@ namespace MvcEx
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+             
+                endpoints.MapControllerRoute(
+                    name: "account",
+                    pattern: "Account/{action=Login}/{id?}",
+                    defaults: new { controller = "Account", action = "Login" });
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+         
 
             app.Run();
         }
