@@ -7,6 +7,16 @@
 </head>
 <body>
     <h1>Добро пожаловать на писательскую платформу</h1>
+    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+    {
+        <input type="text" name="searchTerm" placeholder="Введите название книги">
+        <input type="submit" value="Поиск">
+    }
+
+    <!-- Ссылка для сортировки по рейтингу -->
+    @Html.ActionLink("Сортировать по рейтингу", "SortByRating")
+
+
     <h2>Список рассказов</h2>
     <ul>
         @foreach (var book in Model)

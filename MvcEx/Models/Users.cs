@@ -22,16 +22,20 @@
         public string genre { get; set; }
         public DateTime written { get; set; }
         public int rating { get; set; }
+        public string author { get; set; }
         public string contents { get; set; }
+        public List<string> comments { get; set; }
 
-        public Books(int id_, string title_, string genre_, DateTime written_, int rating_,string contents_)
+        public Books(int id_, string title_, string genre_, DateTime written_, string author_,int rating_,string contents_, List<string> comments)
         {
             this.id = id_;
             this.title = title_;
             this.genre = genre_;
             this.written = written_;
             this.rating = rating_;
+            this.author = author_;
             this.contents = contents_;
+            this.comments = comments;
         }
         public Books() { }
     }

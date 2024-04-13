@@ -56,14 +56,58 @@ namespace MvcEx.Controllers
         {
             // Получение информации о книге с определенным id из базы данных
             Books book;
+            List<string> comments;
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 book = connection.QueryFirstOrDefault<Books>("SELECT * FROM Books WHERE id = @id", new { id });
+                comments = connection.Query<string>("SELECT comment FROM Comments WHERE bookId = @id", new { id }).AsList();
             }
+            book.comments = comments;
 
-            // Передача информации о книге в представление для отображения
+            // Передача информации о книге и комментариев в представление для отображения
             return View(book);
         }
+
+        [HttpPost]
+        public ActionResult AddComment(int bookId, string comment)
+        {
+            // Сохранение комментария к книге в базе данных
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                connection.Execute("INSERT INTO Comments (bookId, comment) VALUES (@bookId, @comment)", new { bookId, comment });
+            }
+
+            // Перенаправление на страницу с деталями книги после добавления комментария
+            return RedirectToAction("BookDetails", new { id = bookId });
+        }
+        public ActionResult Search(string searchTerm)
+        {
+            // Получение списка книг, удовлетворяющих запросу поиска
+            List<Books> books;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                books = connection.Query<Books>("SELECT * FROM Books WHERE title LIKE @searchTerm", new { searchTerm = "%" + searchTerm + "%" }).AsList();
+            }
+
+            // Передача списка книг в представление для отображения
+            return View("Index", books);
+        }
+        public ActionResult SortByRating()
+{
+    // Получение списка книг, отсортированных по рейтингу
+    List<Books> books;
+    using (var connection = new SqlConnection(connectionString))
+    {
+        connection.Open();
+        books = connection.Query<Books>("SELECT * FROM Books ORDER BY rating DESC").AsList();
+    }
+
+    // Передача списка книг в представление для отображения
+    return View("Index", books);
+}
+
     }
 }
